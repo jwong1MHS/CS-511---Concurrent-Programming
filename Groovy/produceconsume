@@ -1,0 +1,23 @@
+Object[] buffer; // buffer of size N
+
+Semaphore consume = new Semaphore(0);
+Semaphore produce = new Semaphore(N);
+
+Thread.start { // Producer
+    while (true) {
+        produce.acquire();
+        buffer[start]=produceItem();
+        start = (start + 1) % N;
+        consume.release();
+    }
+}
+
+
+Thread.start { // Consumer
+    while (true) {
+        consume.acquire();
+        consumeItem(buffer[rear]);
+        rear = (rear + 1) % N;
+        produce.release();
+    }
+}
