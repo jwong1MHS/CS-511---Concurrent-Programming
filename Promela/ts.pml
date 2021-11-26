@@ -1,12 +1,15 @@
 byte c=0;
 
-byte n = 0;
 proctype P() {
-    byte temp , i;
-    for (i:1..10) {
-        temp = n;
-        n=temp+1
-    }
+    byte i=0;
+    byte tmp=0;
+    do
+        :: i<10 ->
+            tmp=c;
+            c=tmp+1;
+            i++;
+        :: else -> break
+    od
 }
 
 proctype Q() {
@@ -15,10 +18,9 @@ proctype Q() {
     do
         :: i<10 ->
             tmp=c;
-            c=tmp+1
+            c=tmp+1;
             i++;
-        :: else ->
-            break
+        :: else -> break
     od
 }
 
@@ -28,6 +30,6 @@ init {
         run Q();
     }
     (_nr_pr==1);
-    printf("The value is %d\n", n);
+    printf("Total:%d\n",c);
     assert (c>2);
 }
