@@ -57,9 +57,9 @@ calc({mult,E1,E2},E) ->
 calc({divi,E1,E2},E) ->
     {val, N1} = calc(E1,E),
     {val, N2} = calc(E2,E),
-    case N1 div N2 of
-        N ->
-            {val,N};
-        error ->
-            throw(division_by_zero_error)
+    case N2 == 0 of
+        true ->
+            throw(division_by_zero_error);
+        false ->
+            {val, N1 div N2}
     end.
