@@ -1,0 +1,9 @@
+never p3 {    /* !([] (((nr_leaders==0)) || ((nr_leaders==1)))) */
+T0_init:
+	do
+	:: atomic { (! ((((nr_leaders==0)) || ((nr_leaders==1))))) -> assert(!(! ((((nr_leaders==0)) || ((nr_leaders==1)))))) }
+	:: (1) -> goto T0_init
+	od;
+accept_all:
+	skip
+}
